@@ -2,9 +2,43 @@
 <html lang="en">
 <head>
 	<meta charset="UTF-8">
-	<title>Document</title>
+	<title>vue</title>
 </head>
 <body>
 	
+	<div id="app">
+		<p v-if="seen">现在你看到我了</p>
+		<ol>
+			<li v-for="todo in todos">{{ todo.message }}</li>
+		</ol>
+		<input type="text" v-model="text">
+		<h2>{{ text }}</h2>
+		<button v-on:click="getReverseMessage">逆转消息</button>
+	</div>
+
+	<script src="https://unpkg.com/vue/dist/vue.js"></script>
+	<script>
+		var app = new Vue({
+			el : "#app",
+			data : {
+				seen : false,
+				todos : [
+					{ message : "第一次接触vue"},
+					{ message : "希望我可以多学习知识"},
+					{ message : "这一次不三天打鱼两天晒网了"}
+				],
+				text : "hello vue!"
+			},
+			methods : {
+				getReverseMessage : function(){
+					this.text = this.text.split("").reverse().join("");
+				}
+			}
+		})
+
+		
+		app.seen = true;
+		app.todos.push({ message : "念念不忘终有回响"})
+	</script>
 </body>
 </html>
