@@ -14,6 +14,9 @@
 		<input type="text" v-model="text">
 		<h2>{{ text }}</h2>
 		<button v-on:click="getReverseMessage">逆转消息</button>
+		<ul>
+			<todo-item v-for="item in autoList" v-bind:todo="item"></todo-item>
+		</ul>
 	</div>
 
 	<script src="https://unpkg.com/vue/dist/vue.js"></script>
@@ -27,7 +30,12 @@
 					{ message : "希望我可以多学习知识"},
 					{ message : "这一次不三天打鱼两天晒网了"}
 				],
-				text : "hello vue!"
+				text : "hello vue!",
+				autoList : [
+					{ listItem : "面包"},
+					{ listItem : "牛奶"},
+					{ listItem : "爱情"}
+				]
 			},
 			methods : {
 				getReverseMessage : function(){
@@ -35,11 +43,16 @@
 				}
 			}
 		})
-
 		
 		app.seen = true;
 		app.todos.push({ message : "念念不忘终有回响"});
-		
+
+
+		Vue.component('todo-item',{
+			props: ['todo'],
+			template : '<li>{{ todo.listItem }}</li>'
+		})
+
 	</script>
 </body>
 </html>
